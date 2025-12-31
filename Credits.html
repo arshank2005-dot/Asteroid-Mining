@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credits</title>
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --bg-dark: #0f172a;       /* Deep Space Blue */
+            --accent-cyan: #06b6d4;   /* Tech Cyan */
+            --accent-purple: #8b5cf6; /* Nebula Purple */
+            --glass-bg: rgba(255, 255, 255, 0.03); /* Translucent background */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-glow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+
+        /* --- RESET & BASE --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            /* Radial Gradient to give a "Spotlight" effect in deep space */
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* --- BACK BUTTON --- */
+        .nav-area {
+            width: 100%;
+            padding: 2rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .back-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px var(--accent-cyan);
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .credits-wrapper {
+            max-width: 700px;
+            width: 90%;
+            margin-top: 6rem; /* Space for the back button */
+            margin-bottom: 4rem;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- HEADING --- */
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 8px; /* Cinematic spacing */
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            color: white;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        /* The glowing underline */
+        h1::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            margin: 15px auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 15px var(--accent-cyan);
+        }
+
+        /* --- GLASS CARDS --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px); /* The "Frosted" effect */
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .card-title {
+            color: var(--accent-cyan);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        /* --- LIST STYLING --- */
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        /* Custom Bullet Points */
+        li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+            font-size: 0.8rem;
+            top: 4px;
+        }
+
+        /* --- AUTHOR SECTION --- */
+        .author-text {
+            font-size: 1.2rem;
+            color: #e2e8f0;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            color: white;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        .email-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--accent-cyan);
+            padding-bottom: 2px;
+            transition: all 0.3s;
+        }
+
+        .email-link:hover {
+            color: white;
+            border-bottom-style: solid;
+            background: rgba(6, 182, 212, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .glass-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-area">
+        <a href="index.html" class="back-btn">BACK</a>
+    </div>
+
+    <div class="credits-wrapper">
+        
+        <h1>Credits</h1>
+
+        <div class="glass-card">
+            <div class="card-title">Image Credits:</div>
+            <ul>
+                <li>Freepik</li>
+                <li>Pixabay</li>
+                <li>Space.com</li>
+                <li>The Solar System Wiki - Fandom</li>
+                <li>ResearchGate</li>
+                <li>Wikipedia</li>
+                <li>NASA</li>
+            </ul>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title">Project Info</div>
+            <div class="author-text">
+                Author: <span class="highlight">Arshan K</span>
+                <br>
+                You can contact me on: <a href="mailto:arshank2005@gmail.com" class="email-link">arshank2005@gmail.com</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

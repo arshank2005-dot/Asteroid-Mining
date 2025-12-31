@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Moon | The Gateway</title>
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            --accent-dark: #111827;
+            --accent-blue: #0ea5e9;
+            --accent-moon: #64748b;
+            --accent-ice: #bae6fd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--accent-dark);
+            color: white;
+            padding: 2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--accent-moon);
+            background-image: linear-gradient(180deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 100% 20px;
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            background-color: var(--accent-moon);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover { background-color: #475569; }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* --- FIXED: Centered Underline --- */
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        /* The 'left: 50%' and 'transform' properties center the line */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0; 
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-moon);
+        }
+
+        /* --- HERO SPLIT --- */
+        .hero-split {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-text { flex: 1; }
+        .hero-img { flex: 1; border-radius: 0px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+
+        /* --- RESOURCE GRID --- */
+        .resource-section {
+            background-color: #e2e8f0;
+            padding: 4rem 2rem;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 5px solid var(--accent-moon);
+            transition: transform 0.2s;
+        }
+
+        .resource-card:hover { transform: translateY(-5px); }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: var(--bg-light);
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .card-ice { border-color: var(--accent-blue); }
+        .card-h3 { border-color: var(--accent-dark); }
+        .card-regolith { border-color: var(--accent-moon); }
+
+        /* --- GRAVITY WELL COMPARISON --- */
+        .gravity-section {
+            background: var(--accent-dark);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        /* --- FIXED: Added height and padding to prevent overlap --- */
+        .gravity-chart {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 4rem;
+            height: 350px;       /* Increased height */
+            padding-top: 50px;   /* Added breathing room for the numbers */
+            margin-top: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bar {
+            width: 100px;
+            background: var(--accent-blue);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            transition: height 1s;
+        }
+
+        .bar-earth { 
+            height: 250px; 
+            background: linear-gradient(to top, #1e3a8a, #3b82f6); 
+        }
+        
+        .bar-moon { 
+            height: 42px;
+            background: linear-gradient(to top, #475569, #94a3b8);
+        }
+
+        .bar-label { font-weight: bold; color: #cbd5e1; }
+        .bar-value { font-size: 1.5rem; font-weight: 800; color: white; }
+
+        @media (max-width: 768px) {
+            .hero-split { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">Asteroid Mining <span style="color:var(--accent-moon)">//</span> The Moon</div>
+        <a href="index.html" class="back-btn">← Return to Main</a>
+    </header>
+
+    <section class="container">
+        <div class="hero-split">
+            <div class="hero-text">
+                <h1 style="font-size: 3rem; margin-bottom: 1rem; color: var(--text-dark);">The Orbital Shipyard</h1>
+                <p style="font-size: 1.2rem; color: #475569; margin-bottom: 1.5rem;">
+                    The Moon is not the final destination—it is the launchpad. 
+                </p>
+                <p>
+                    For asteroid mining to be economically viable, we cannot launch everything from Earth. The Moon serves as a <strong>Forward Operating Base (FOB)</strong> where spacecraft are built, refueled, and repaired using local materials, avoiding Earth's crushing gravity tax.
+                </p>
+            </div>
+            <div class="hero-img">
+                                <img src="Lunar Gateway.png" width="517px" height="400px" alt="Lunar Base Concept">
+            </div>
+        </div>
+    </section>
+
+    <section class="resource-section">
+        <div class="container" style="padding: 0;">
+            <h2 class="section-title" style="text-align: center; border:none;">Lunar Resources</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 3rem;">
+                We don't mine the Moon for gold; we mine it for consumables that keep the fleet running.
+            </p>
+
+            <div class="resource-grid">
+                <div class="resource-card card-ice">
+                    <span class="card-icon">💧</span>
+                    <h3>Water Ice</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; font-weight: bold; margin-bottom: 1rem;">Found in: Polar Craters</p>
+                    <p>
+                        The most valuable resource in space. Water can be electrolyzed into Hydrogen (Fuel) and Oxygen (Oxidizer). It turns the Moon into a massive gas station for ships heading to the Asteroid Belt.
+                    </p>
+                </div>
+
+                <div class="resource-card card-h3">
+                    <span class="card-icon">⚛️</span>
+                    <h3>Helium-3</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; font-weight: bold; margin-bottom: 1rem;">Found in: Regolith</p>
+                    <p>
+                        Deposited by solar winds over billions of years. A rare isotope that theoretically allows for clean nuclear fusion. It could power the high-thrust engines needed to haul heavy asteroids.
+                    </p>
+                </div>
+
+                <div class="resource-card card-regolith">
+                    <span class="card-icon">🧱</span>
+                    <h3>Silicates & Metals</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; font-weight: bold; margin-bottom: 1rem;">Found in: Surface Dust</p>
+                    <p>
+                        Lunar soil (regolith) can be sintered via 3D printing to build habitats, radiation shields, and landing pads. It allows us to build infrastructure without launching concrete from Earth.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gravity-section">
+        <div class="container" style="padding: 0;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">The Gravity Trap</h2>
+            <p style="color: #cbd5e1; max-width: 700px; margin: 0 auto;">
+                Why build on the Moon? Because Earth holds onto its mass too tightly. 
+                Escaping Earth requires massive rockets. Escaping the Moon requires a nudge.
+            </p>
+
+            <div class="gravity-chart">
+                <div class="bar-group">
+                    <span class="bar-value">11.2</span>
+                    <div class="bar bar-earth"></div>
+                    <span class="bar-label">Earth Escape Velocity (km/s)</span>
+                </div>
+
+                <div class="bar-group">
+                    <span class="bar-value">2.4</span>
+                    <div class="bar bar-moon"></div>
+                    <span class="bar-label">Moon Escape Velocity (km/s)</span>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem; font-style: italic; color: var(--accent-blue);">
+                "If you can get to Low Earth Orbit, you're halfway to anywhere." — Robert Heinlein
+            </p>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 2rem; background: var(--accent-dark); color: #64748b; border-top: 1px solid #334155;">
+        <p>&copy; 2025 Asteroid Mining Initiative. Designed for Educational Purposes.</p>
+    </footer>
+
+</body>
+</html>

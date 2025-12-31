@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnetic Rakes | Ferrous Harvesting</title>
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            --accent-dark: #1e1b4b; /* Deep Indigo/Black */
+            --accent-blue: #0ea5e9;
+            --accent-mag: #6366f1;  /* Magnetic Indigo */
+            --accent-iron: #94a3b8; /* Steel Grey */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--accent-dark);
+            color: white;
+            padding: 2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--accent-mag);
+            /* Magnetic Field Pattern Effect */
+            background-image: radial-gradient(circle at 50% -20%, #312e81 0%, transparent 60%);
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            background-color: transparent;
+            color: var(--accent-mag);
+            border: 2px solid var(--accent-mag);
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: var(--accent-mag);
+            color: white;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.6); /* Glow Effect */
+        }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Using a magnet icon shape for the title decoration */
+        .section-title::before {
+            content: 'U'; 
+            display: inline-block;
+            font-family: monospace;
+            font-weight: 900;
+            transform: rotate(180deg);
+            background: var(--accent-mag);
+            color: white;
+            padding: 0 10px;
+            border-radius: 4px 4px 50px 50px;
+            font-size: 1.5rem;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; color: var(--text-dark); }
+        .hero p { font-size: 1.2rem; color: #64748b; max-width: 800px; margin: 0 auto; }
+
+        /* --- THE MECHANISM (Cards) --- */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border-top: 5px solid var(--accent-mag);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-mag);
+        }
+
+        /* --- VISUAL EXPLANATION (Dark Area) --- */
+        .visual-section {
+            background-color: var(--accent-dark);
+            color: white;
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .split-layout {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .text-side { flex: 1; }
+        
+        .image-side { 
+            flex: 1; 
+            border: 2px solid var(--accent-mag);
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* --- ADVANTAGES LIST --- */
+        .adv-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .adv-list li {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .check-mark {
+            color: var(--accent-mag);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* --- TARGET ASTEROIDS --- */
+        .target-box {
+            background: #e0e7ff; /* Very light indigo */
+            border-left: 5px solid var(--accent-mag);
+            padding: 2rem;
+            margin-top: 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .split-layout { flex-direction: column; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">Asteroid Mining <span style="color:var(--accent-mag)">//</span> Magnetic Rakes</div>
+        <a href="index.html" class="back-btn">← Return to Main</a>
+    </header>
+
+    <section class="hero">
+        <h1>Harvesting the Invisible</h1>
+        <p>
+            On airless worlds, suction vacuums don't work. <br>
+            Magnetic Rakes use powerful electromagnetic coils to "inhale" loose metal dust (regolith) from the surface without ever touching the ground.
+        </p>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">The Extraction Sequence</h2>
+        
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-icon">📡</div>
+                <h3>1. The Sweep</h3>
+                <p>The spacecraft hovers just a few meters above the asteroid surface. It extends a boom arm containing a series of rotating magnetic coils.</p>
+            </div>
+
+            <div class="step-icon" style="text-align: center; align-self: center; color: #cbd5e1; transform: rotate(90deg);">➤</div>
+
+            <div class="step-card">
+                <div class="step-icon">🧲</div>
+                <h3>2. The Jump</h3>
+                <p>When the magnets activate, loose grains of Nickel and Iron fly upward, overcoming the asteroid's weak gravity and sticking to the rake's bristles.</p>
+            </div>
+
+            <div class="step-icon" style="text-align: center; align-self: center; color: #cbd5e1; transform: rotate(90deg);">➤</div>
+
+            <div class="step-card">
+                <div class="step-icon">📥</div>
+                <h3>3. The Deposit</h3>
+                <p>The rotating drum moves the captured dust inside the ship. The magnets turn off (or pass a scraper), causing the metal to fall into the cargo hold.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="visual-section">
+        <div class="split-layout">
+            <div class="image-side">
+                
+                <img src="Magnetic Rake.png" alt="Magnetic Rake Diagram" style="width: 100%; border-radius: 4px;">
+                <p style="text-align: center; font-size: 0.8rem; color: #a5b4fc; margin-top: 10px;">
+                    Diagram showing field lines interacting with surface regolith.
+                </p>
+            </div>
+
+            <div class="text-side">
+                <h2 style="color: white; margin-bottom: 1.5rem;">Why Use Magnets?</h2>
+                <p style="color: #cbd5e1; font-size: 1.1rem; margin-bottom: 2rem;">
+                    Mechanical mining (shovels and drills) is messy. In zero-gravity, if you hit a rock with a shovel, the rock floats away—or your spaceship gets pushed backward.
+                </p>
+                
+                <h3 style="color: var(--accent-mag); margin-bottom: 1rem;">Key Advantages</h3>
+                <ul class="adv-list">
+                    <li>
+                        <span class="check-mark">✓</span>
+                        <div>
+                            <strong style="color: white;">Zero Contact</strong>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">No physical contact with the ground means equipment doesn't wear out from abrasion.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="check-mark">✓</span>
+                        <div>
+                            <strong style="color: white;">Selective Sorting</strong>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">The magnets automatically separate valuable metal ore from useless silicate rocks.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="check-mark">✓</span>
+                        <div>
+                            <strong style="color: white;">Low Energy</strong>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">Requires only electricity (from solar panels), avoiding the need for heavy mechanical motors.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Target Environment</h2>
+        <p>Magnetic rakes are specialized tools designed specifically for <strong>M-Type Asteroids</strong>.</p>
+
+        <div class="target-box">
+            <h3 style="color: var(--text-dark); margin-bottom: 0.5rem;">M-Type (Metallic) Asteroids</h3>
+            <p style="margin-bottom: 1rem;">
+                These are the exposed cores of ancient protoplanets. They are composed almost entirely of Iron, Nickel, and Cobalt.
+            </p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <span style="background: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; border: 1px solid var(--accent-mag); color: var(--accent-mag);">Fe (Iron)</span>
+                <span style="background: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; border: 1px solid var(--accent-mag); color: var(--accent-mag);">Ni (Nickel)</span>
+                <span style="background: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; border: 1px solid var(--accent-mag); color: var(--accent-mag);">Co (Cobalt)</span>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background-color: var(--accent-dark); color: #64748b; padding: 3rem; text-align: center; margin-top: 2rem;">
+        <p>&copy; 2025 Asteroid Mining Initiative. <br>Designed for Educational Purposes.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In-Space Manufacturing | Orbital Construction</title>
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --bg-light: #fff7ed; /* Very light orange tint */
+            --bg-white: #ffffff;
+            --text-main: #334155;
+            --text-dark: #431407; /* Dark Brown/Black */
+            --accent-dark: #1c1917; /* Warm Black */
+            --accent-build: #ea580c; /* Industrial Orange */
+            --accent-steel: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--accent-dark);
+            color: white;
+            padding: 2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--accent-build);
+            /* Hazard Stripe Pattern */
+            background-image: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 10px,
+                rgba(234, 88, 12, 0.1) 10px,
+                rgba(234, 88, 12, 0.1) 20px
+            );
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            background-color: transparent;
+            color: var(--accent-build);
+            border: 2px solid var(--accent-build);
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: var(--accent-build);
+            color: white;
+        }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            border-bottom: 3px solid var(--accent-build);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4rem 2rem;
+            background: white;
+            border-bottom: 1px solid #fed7aa;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-text { flex: 1; }
+        .hero-visual { flex: 1; }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; color: var(--accent-dark); line-height: 1.1; }
+        .hero p { font-size: 1.25rem; color: #64748b; margin-bottom: 2rem; }
+
+        /* --- THE PROBLEM (Fairing Limits) --- */
+        .problem-box {
+            background: var(--accent-dark);
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .limit-chart {
+            width: 100px;
+            height: 150px;
+            border: 2px dashed #64748b;
+            border-radius: 50% 50% 0 0; /* Rocket Fairing Shape */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .limit-chart::after {
+            content: "Max Size";
+            font-size: 0.8rem;
+            color: #ea580c;
+            font-weight: bold;
+        }
+
+        /* --- METHODS GRID --- */
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .method-card {
+            background: white;
+            border: 1px solid #fdba74;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .method-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(234, 88, 12, 0.1); }
+
+        .method-header {
+            background: #fff7ed;
+            padding: 1.5rem;
+            border-bottom: 1px solid #fdba74;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .method-icon {
+            font-size: 1.5rem;
+            background: var(--accent-build);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .method-body { padding: 1.5rem; }
+
+        /* --- SPIDERFAB SECTION --- */
+        .tech-highlight {
+            background-color: #ffedd5; /* Light orange background */
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid #fb923c;
+            border-bottom: 1px solid #fb923c;
+        }
+
+        .highlight-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--accent-dark);
+            color: #94a3b8;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; }
+            .problem-box { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">Asteroid Mining <span style="color:var(--accent-build)">//</span> 3D Printing</div>
+        <a href="index.html" class="back-btn">← Return to Main</a>
+    </header>
+
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Don't Launch It.<br><span style="color:var(--accent-build)">Build It.</span></h1>
+            <p>
+                The biggest constraint in space exploration is the rocket fairing. 
+                In-Space Manufacturing (ISM) allows us to launch compact raw materials and print massive structures directly in orbit.
+            </p>
+        </div>
+        <div class="hero-visual">
+            
+            <img src="SpiderFab.png" alt="3D Printing in Space" style="width: 100%; border-radius: 12px; box-shadow: 20px 20px 0px var(--accent-dark);">
+        </div>
+    </div>
+
+    <section class="container" style="padding-top: 0;">
+        <div class="problem-box">
+            <div class="limit-chart"></div>
+            <div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--accent-build);">The "Fairing Limit"</h3>
+                <p style="color: #d1d5db;">
+                    Currently, any telescope or space station must fold up like origami to fit inside a 5-meter rocket nose cone. This involves complex hinges and high risks of failure.
+                    <br><br>
+                    <strong>The Solution:</strong> Launch a spool of plastic or metal (dense cargo) and a 3D printer. The printer can extrude a truss that is 1 km long—impossible to launch in one piece.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Fabrication Techniques</h2>
+        
+        <div class="methods-grid">
+            <div class="method-card">
+                <div class="method-header">
+                    <div class="method-icon">▚</div>
+                    <h3>Truss Extrusion</h3>
+                </div>
+                <div class="method-body">
+                    <p><strong>Concept:</strong> Similar to a desktop 3D printer but open-ended.</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #64748b;">
+                        A robot (like the "Archinaut") extrudes high-strength polymer beams endlessly into the vacuum. These beams form the skeleton for solar arrays or telescopes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="method-card">
+                <div class="method-header">
+                    <div class="method-icon">☀</div>
+                    <h3>Solar Sintering</h3>
+                </div>
+                <div class="method-body">
+                    <p><strong>Concept:</strong> Using sunlight as a laser.</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #64748b;">
+                        A lens concentrates sunlight onto a bed of asteroid dust (regolith). The heat melts the dust into solid rock or glass bricks, used for building radiation shields.
+                    </p>
+                </div>
+            </div>
+
+            <div class="method-card">
+                <div class="method-header">
+                    <div class="method-icon">⚙</div>
+                    <h3>Metal Beam Forming</h3>
+                </div>
+                <div class="method-body">
+                    <p><strong>Concept:</strong> Electron Beam Melting (EBM).</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #64748b;">
+                        Using electron beams to melt metal wire in a vacuum. This creates high-strength aluminum or titanium parts for repairing ships without needing spare parts from Earth.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-highlight">
+        <div class="highlight-content">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent-dark);">Future Tech: SpiderFab</h2>
+            <p style="font-size: 1.1rem; color: #7c2d12; margin-bottom: 2rem;">
+                A NASA-funded concept by Tethers Unlimited. A small robot spins a carbon-fiber truss structure much larger than itself, similar to how a spider spins a web.
+            </p>
+            
+            <div style="background: white; padding: 2rem; border-radius: 8px; border: 1px dashed #ea580c; display: inline-block;">
+                
+                <img src="SpiderFab.png" alt="SpiderFab Diagram" style="max-width: 100%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Asteroid Mining Initiative. <br>Designed for Educational Purposes.</p>
+    </footer>
+
+</body>
+</html>

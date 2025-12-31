@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroid Mining | The Future of Resources</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            --accent-dark: #1e293b;
+            --accent-blue: #0ea5e9;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
+        /* --- HEADER / HERO SECTION (Dark Futuristic Area) --- */
+        header {
+            background-color: var(--accent-dark);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--accent-blue);
+        }
+
+        /* Adding a subtle grid pattern for tech feel */
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 233, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        header p {
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-blue);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- LOCATIONS SECTION --- */
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .location-card {
+            background: var(--bg-white);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .location-content {
+            padding: 1.5rem;
+        }
+
+        .location-tag {
+            background-color: var(--accent-dark);
+            color: var(--accent-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* --- TECHNOLOGY SECTION (Dark Accent Area) --- */
+        .tech-section {
+            background-color: #e2e8f0; /* Slightly darker grey to differentiate */
+            border-top: 1px solid #cbd5e1;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .tech-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .tech-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .tech-visual {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .tech-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-blue);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .tech-item h4 {
+            margin-bottom: 0.5rem;
+            color: var(--accent-dark);
+        }
+
+        /* --- ADVANTAGES & RISKS --- */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .analysis-col h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .list-group {
+            list-style: none;
+        }
+
+        .list-item {
+            background: white;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .open-button {
+            display: inline-block;
+            padding: 1px 20px;
+            background: var(--accent-dark);
+            color: var(--accent-blue);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 5px;
+            text-decoration: none;
+            font-family: sans-serif;
+        }
+
+        .open-button:hover {
+            background: lightskyblue;
+            color: black;
+        }
+
+        .credits-button {
+            display: inline-block;
+            padding: 1px 20px;
+            background: var(--accent-dark);
+            color: white;
+            border: none;
+            border-radius: 0px;
+            cursor: pointer;
+            margin-top: 5px;
+            text-decoration: none;
+            font-family: sans-serif;
+        }
+
+        .credits-button:hover {
+            background: lightskyblue;
+            color: black;
+        }
+
+        /* Specific styling for Pros vs Cons */
+        .pros .list-item { border-left: 5px solid var(--accent-green); }
+        .cons .list-item { border-left: 5px solid var(--accent-red); }
+
+        .icon {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--accent-dark);
+            color: #94a3b8;
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        footer strong { color: white; }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Asteroid Mining</h1>
+        <p>Resource extraction from near-Earth objects to fuel the space economy.</p>
+    </header>
+
+    <div class="container" style="text-align: center; max-width: 800px;">
+        <p style="font-size: 1.25rem;">
+            Asteroid mining involves the extraction of raw materials from minor planets and asteroids. 
+            These celestial bodies contain minerals that are rare on Earth, such as platinum, gold, and palladium, 
+            as well as water which is crucial for deep-space exploration.
+        </p>
+    </div>
+
+    <section class="container" id="locations">
+        <h2 class="section-title">Potential Mining Targets</h2>
+        
+        <div class="locations-grid">
+            <div class="location-card">
+                <img src="Juno Asteroid.png" width="400" height="266" alt="Near-Earth Asteroid">
+                <div class="location-content">
+                    <span class="location-tag">High Accessibility</span>
+                    <a href="Near Earth Asteroids.html" class="open-button"><b>OPEN</b></a>
+                    <h3>Near-Earth Asteroids (NEAs)</h3>
+                    <p>These have orbits that pass close to Earth. Due to low delta-v (velocity change) requirements, they are the most immediate targets for early mining missions.</p>
+                </div>
+            </div>
+
+            <div class="location-card">
+                
+
+
+
+                <img src="Main Asteroid Belt.png" width="400" height="266" alt="Main Belt">
+                <div class="location-content">
+                    <span class="location-tag">High Volume</span>
+                    <a href="The Main Belt.html" class="open-button"><b>OPEN</b></a>
+                    <h3>The Main Belt</h3>
+                    <p>Located between Mars and Jupiter, this area contains the vast majority of asteroids. While harder to reach, it holds essentially unlimited mineral wealth.</p>
+                </div>
+            </div>
+
+            <div class="location-card">
+                
+
+
+
+                <img src="Moon.png" width="400" height="266" alt="The Moon">
+                <div class="location-content">
+                    <span class="location-tag">Strategic Base</span>
+                    <a href="The Moon.html" class="open-button"><b>OPEN</b></a>
+                    <h3>The Moon</h3>
+                    <p>While not an asteroid, the Moon is a crucial stepping stone. Mining lunar regolith for Helium-3 and water ice is essential for processing asteroid materials.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-section">
+        <div class="container">
+            <h2 class="section-title">Emerging Technologies</h2>
+            
+            <div class="tech-container">
+                <div class="tech-visual">
+                    
+                    <img src="Moon Excavator.png" alt="Tech Schematic">
+                </div>
+                
+                <div class="tech-text">
+                    <div class="tech-item">
+                        <h4>Optical Mining</h4>
+                        <p>Using concentrated sunlight to superheat the asteroid surface, causing "spalling" where rocks fracture and release trapped water and volatiles.</p>
+                        <a href="Optical Mining.html" class="open-button"><b>OPEN</b></a>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Magnetic Rakes</h4>
+                        <p>Specialized electromagnets designed to sweep surfaces and collect loose metallic regolith (nickel-iron) from the asteroid's surface.</p>
+                        <a href="Magnetic Rakes.html" class="open-button"><b>OPEN</b></a>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Swarm Robotics</h4>
+                        <p>Instead of one massive ship, deploying hundreds of small, autonomous robots to prospect and extract resources cooperatively.</p>
+                        <a href="Swarm Robotics.html" class="open-button"><b>OPEN</b></a>
+                    </div>
+                    <div class="tech-item">
+                        <h4>In-Space 3D Printing</h4>
+                        <p>Technologies to process raw asteroid material directly into structural components in zero-gravity environments.</p>
+                        <a href="In Space 3D Printing.html" class="open-button"><b>OPEN</b></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" id="pros-cons">
+        <h2 class="section-title">Analysis: Risks vs. Rewards</h2>
+
+        <div class="analysis-grid">
+            <div class="analysis-col pros">
+                <h3 style="color: var(--accent-green);">
+                    <span>&#9650;</span> Advantages
+                </h3>
+                <ul class="list-group">
+                    <li class="list-item">
+                        <span class="icon">&#128176;</span>
+                        <div>
+                            <strong>Resource Abundance</strong>
+                            <p>Unlimited supply of Platinum group metals (PGMs) needed for electronics and green energy tech.</p>
+                        </div>
+                    </li>
+                    <li class="list-item">
+                        <span class="icon">&#128640;</span>
+                        <div>
+                            <strong>Space Fuel (Water)</strong>
+                            <p>Water extracted from asteroids can be split into Hydrogen and Oxygen to refuel spacecraft in orbit.</p>
+                        </div>
+                    </li>
+                    <li class="list-item">
+                        <span class="icon">&#127757;</span>
+                        <div>
+                            <strong>Environmental Protection</strong>
+                            <p>Moving heavy industrial mining off-planet reduces pollution and ecosystem destruction on Earth.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="analysis-col cons">
+                <h3 style="color: var(--accent-red);">
+                    <span>&#9660;</span> Risks & Challenges
+                </h3>
+                <ul class="list-group">
+                    <li class="list-item">
+                        <span class="icon">&#9878;</span>
+                        <div>
+                            <strong>Legal Ambiguity</strong>
+                            <p>The 1967 Outer Space Treaty forbids claiming territory, creating complex legal battles over resource ownership.</p>
+                        </div>
+                    </li>
+                    <li class="list-item">
+                        <span class="icon">&#128201;</span>
+                        <div>
+                            <strong>Economic Disruption</strong>
+                            <p>Flooding the market with cheap precious metals could crash global economies and devalue national reserves.</p>
+                        </div>
+                    </li>
+                    <li class="list-item">
+                        <span class="icon">&#127760;</span>
+                        <div>
+                            <strong>Orbital Debris</strong>
+                            <p>Mining operations could create dust clouds or debris fields that threaten satellites and future space travel.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <p>
+        <a href="Credits.html" class="credits-button"><b>CREDITS</b></a>
+    </p>
+
+    <footer>
+        <p>&copy; 2025 <strong>Asteroid Mining Initiative</strong>. All Rights Reserved.</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">Designed for Educational Purposes.</p>
+    </footer>
+
+</body>
+</html>

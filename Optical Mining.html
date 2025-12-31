@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optical Mining | Solar Excavation</title>
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            --accent-dark: #1e293b;
+            --accent-blue: #0ea5e9;
+            --accent-gold: #f59e0b; /* Solar Gold for this specific page */
+            --accent-heat: #ef4444; /* Red for heat/thermal indicators */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--accent-dark);
+            color: white;
+            padding: 2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--accent-gold);
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(255,255,255,0.03) 0px,
+                rgba(255,255,255,0.03) 2px,
+                transparent 2px,
+                transparent 10px
+            );
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            background-color: var(--accent-gold);
+            color: var(--accent-dark);
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover { background-color: #d97706; color: white; }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            border-left: 5px solid var(--accent-gold);
+            padding-left: 15px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; color: var(--text-dark); }
+        .hero p { font-size: 1.25rem; color: #64748b; max-width: 800px; margin: 0 auto; }
+
+        /* --- HOW IT WORKS (Dark Section) --- */
+        .process-section {
+            background-color: var(--accent-dark);
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .process-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.08);
+            border-color: var(--accent-gold);
+        }
+
+        .step-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(255,255,255,0.1);
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            line-height: 1;
+        }
+
+        .process-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+
+        /* --- TECHNICAL DIAGRAM SECTION --- */
+        .diagram-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .diagram-text { flex: 1; min-width: 300px; }
+        
+        .diagram-visual { 
+            flex: 1.5; 
+            min-width: 300px; 
+            border: 2px dashed #cbd5e1; 
+            padding: 1rem;
+            border-radius: 8px;
+            background: #f1f5f9;
+            text-align: center;
+        }
+
+        /* --- WHY OPTICAL? (Comparison) --- */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1.2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .check { color: var(--accent-blue); font-weight: bold; }
+        .cross { color: #ef4444; font-weight: bold; }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--accent-dark);
+            color: #94a3b8;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .diagram-container { flex-direction: column; }
+        }
+        .open-diagram {
+            display: inline-block; 
+            padding: 1px 20px; 
+            background: var(--accent-dark); 
+            color: var(--accent-gold); 
+            border: none; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            margin-top: 5px; 
+            text-decoration: none;
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .open-diagram:hover {
+            color: black;
+            background-color: var(--accent-gold);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">Asteroid Mining <span style="color:var(--accent-gold)">//</span> Optical Mining</div>
+        <a href="index.html" class="back-btn">← Return to Main</a>
+    </header>
+
+    <div class="hero">
+        <h1>Excavation at the Speed of Light</h1>
+        <p>
+            Optical Mining is a revolutionary technology that eliminates the need for heavy drills and excavators. 
+            By concentrating sunlight, we can fracture rocks and extract water using pure thermal energy.
+        </p>
+    </div>
+
+    <section class="process-section">
+        <div class="container" style="padding: 0;">
+            <h2 class="section-title" style="color: white; border-color: var(--accent-gold);">The Physics of "Spalling"</h2>
+            <p style="color: #cbd5e1; max-width: 700px;">
+                Traditional mining grinds rock. Optical mining explodes it microscopically. Here is the step-by-step mechanism.
+            </p>
+
+            <div class="process-grid">
+                <div class="process-card">
+                    <div class="step-number">1</div>
+                    <span class="process-icon">☀️</span>
+                    <h3>Concentrate</h3>
+                    <p style="color: #cbd5e1;">
+                        Massive, lightweight inflatable mirrors capture sunlight and focus it into a tight beam, intensifying the heat by thousands of times.
+                    </p>
+                </div>
+
+                <div class="process-card">
+                    <div class="step-number">2</div>
+                    <span class="process-icon">🔥</span>
+                    <h3>Thermal Shock</h3>
+                    <p style="color: #cbd5e1;">
+                        The beam hits the asteroid surface. The extreme temperature difference causes the rock to fracture and flake off (thermal spalling) without touching it.
+                    </p>
+                </div>
+
+                <div class="process-card">
+                    <div class="step-number">3</div>
+                    <span class="process-icon">❄️</span>
+                    <h3>Capture</h3>
+                    <p style="color: #cbd5e1;">
+                        The asteroid is contained in a sealed bag. As the rock fractures, water ice sublimates into steam, which is trapped by the bag.
+                    </p>
+                </div>
+
+                <div class="process-card">
+                    <div class="step-number">4</div>
+                    <span class="process-icon">💧</span>
+                    <h3>Condense</h3>
+                    <p style="color: #cbd5e1;">
+                        The trapped steam is pumped into "Cold Traps" (cryogenic tanks) where it freezes back into pure ice, ready to be used as rocket fuel.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Technology Schematic</h2>
+        
+        <div class="diagram-container">
+            <div class="diagram-visual">
+                
+                <img src="Mini Bee.png" width="630px" alt="Schematic" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);">
+                <p style="text-align: center; font-size: 0.85rem; color: #64748b; margin-top: 10px;">
+                    Concept visualization of the "Mini Bee" optical miner capturing a small asteroid.
+                </p>
+                <p>
+                    <a href="Mini Bee Diagram Page.html" class="open-diagram"><b>OPEN DIAGRAM</b></a>
+                </p>
+            </div>
+
+            <div class="diagram-text">
+                <h3 style="margin-bottom: 1rem;">Why Drills Don't Work in Space</h3>
+                <p style="margin-bottom: 1.5rem;">
+                    On Earth, excavators use gravity to push down into the dirt. In Zero-G, if a drill pushes against a rock, the spaceship gets pushed backwards.
+                </p>
+                
+                <div style="background: white; border-left: 4px solid var(--accent-gold); padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <h4 style="color: var(--accent-dark); margin-bottom: 0.5rem;">The Optical Advantage</h4>
+                    <p>
+                        Optical mining has <strong>Zero Reaction Force</strong>. Because we are only throwing light (photons) at the rock, the spacecraft doesn't need massive thrusters to hold itself in place. It melts the asteroid from a distance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="padding-top: 0;">
+        <h2 class="section-title">Optical vs. Mechanical</h2>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Mechanical Mining (Drills)</th>
+                    <th>Optical Mining (Lasers/Sun)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Moving Parts</strong></td>
+                    <td><span class="cross">High</span> (Gears, bits, hydraulics break easily)</td>
+                    <td><span class="check">Low</span> (Only mirrors move)</td>
+                </tr>
+                <tr>
+                    <td><strong>Dust Control</strong></td>
+                    <td><span class="cross">Difficult</span> (Debris floats everywhere)</td>
+                    <td><span class="check"> contained</span> (Sealed inside a bag)</td>
+                </tr>
+                <tr>
+                    <td><strong>Power Source</strong></td>
+                    <td>Requires heavy electricity/batteries</td>
+                    <td>Uses direct solar thermal energy</td>
+                </tr>
+                <tr>
+                    <td><strong>Rock Hardness</strong></td>
+                    <td>Bits break on hard rocks</td>
+                    <td>Works better on hard/volatile rocks</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Asteroid Mining Initiative. <br>Designed for Educational Purposes.</p>
+    </footer>
+
+</body>
+</html>

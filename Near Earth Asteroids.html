@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEAs | Target Analysis</title>
+    <style>
+        /* --- CSS VARIABLES (Matching Previous Page) --- */
+        :root {
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            --accent-dark: #1e293b;
+            --accent-blue: #0ea5e9;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-gold: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER (Mini Version) --- */
+        header {
+            background-color: var(--accent-dark);
+            color: white;
+            padding: 2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--accent-blue);
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            background-color: var(--accent-blue);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover { background-color: #0284c7; }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            border-left: 5px solid var(--accent-blue);
+            padding-left: 15px;
+        }
+
+        /* --- CLASSIFICATION SECTION (Dark Theme) --- */
+        .classification-section {
+            background-color: var(--accent-dark);
+            color: #cbd5e1;
+            padding: 4rem 2rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Grid overlay effect */
+        .classification-section::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(var(--accent-blue) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.05;
+        }
+
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .class-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .class-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .class-card h3 {
+            color: var(--accent-blue);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .orbit-diagram {
+            width: 80px;
+            height: 80px;
+            border: 2px solid #555;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        /* Simple CSS shapes to visualize orbits */
+        .orbit-sun {
+            position: absolute; top: 50%; left: 50%;
+            width: 10px; height: 10px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* --- DELTA-V / PHYSICS SECTION --- */
+        .delta-v-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .delta-text { flex: 1; min-width: 300px; }
+        .delta-visual { flex: 1; min-width: 300px; }
+
+        .stat-box {
+            background: white;
+            border-left: 4px solid var(--accent-green);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* --- PRIME CANDIDATES TABLE --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background-color: var(--accent-dark);
+            color: white;
+            text-align: left;
+            padding: 1rem;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .tag-c { background: #e2e8f0; color: #475569; } /* Carbon */
+        .tag-s { background: #fef3c7; color: #d97706; } /* Stony */
+        .tag-m { background: #dbeafe; color: #2563eb; } /* Metallic */
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .class-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">Asteroid Mining <span style="color:var(--accent-blue)">//</span> NEAs</div>
+        <a href="index.html" class="back-btn">← Return to Main</a>
+    </header>
+
+    <section class="container">
+        <h1 style="font-size: 3rem; color: var(--text-dark); margin-bottom: 1rem;">Near-Earth Asteroids (NEAs)</h1>
+        <p style="font-size: 1.2rem; color: #64748b; max-width: 800px;">
+            NEAs are asteroids with orbits that bring them within <strong>1.3 Astronomical Units (AU)</strong> of the Sun. 
+            Because they reside in Earth's neighborhood, they serve as the most accessible "gas stations" and "mineral deposits" for the early space economy.
+        </p>
+
+        <div style="margin-top: 2rem; padding: 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px;">
+            
+
+<!-- Apollo Aten and Amor Picture -->
+
+            <p style="text-align: center; color: #64748b; font-size: 0.9rem; margin-top: 0.5rem;">
+                <img src="Aten Amor Apollo.png" width="420px" height="300px">
+            </p>
+        </div>
+    </section>
+
+    <section class="classification-section">
+        <div class="container" style="padding: 0; margin: 0 auto;">
+            <h2 class="section-title" style="color: white; border-color: var(--accent-blue);">Orbital Classifications</h2>
+            <p style="margin-bottom: 2rem; max-width: 700px;">
+                NEAs are categorized into four distinct groups based on their orbits relative to Earth's orbit. 
+                Understanding these paths is critical for launch window planning.
+            </p>
+
+            <div class="class-grid">
+                <div class="class-card">
+                    <h3>Atiras</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem; color: #94a3b8;">Interior to Earth</p>
+                    <p>These asteroids have orbits strictly <strong>inside</strong> Earth's orbit. They are difficult to observe because they are always close to the Sun in the sky, but they offer stable, frequent launch windows.</p>
+                </div>
+
+                <div class="class-card">
+                    <h3>Atens</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem; color: #94a3b8;">Earth-Crossing (Small)</p>
+                    <p>Asteroids with an orbit smaller than Earth's, but their furthest point (aphelion) crosses Earth's path. High risk of collision, but high accessibility.</p>
+                </div>
+
+                <div class="class-card" style="border-color: var(--accent-blue); background: rgba(14, 165, 233, 0.1);">
+                    <h3>Apollos</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--accent-blue);">Earth-Crossing (Large)</p>
+                    <p>The largest group of NEAs. Their orbits are larger than Earth's, but their closest point (perihelion) crosses Earth's path. <strong>Most mining targets are likely to be Apollos.</strong></p>
+                </div>
+
+                <div class="class-card">
+                    <h3>Amors</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem; color: #94a3b8;">Exterior Approach</p>
+                    <p>These approach Earth but do not cross its orbit; they stay strictly outside. They often hover between Earth and Mars, making them ideal stopovers for Martian missions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="delta-v-container">
+            <div class="delta-text">
+                <h2 class="section-title">The Delta-V Advantage</h2>
+                <p>
+                    In spaceflight, distance matters less than <strong>Delta-V</strong> (change in velocity). 
+                    Delta-V is the "energy budget" required to reach an object.
+                </p>
+                
+                <div class="stat-box">
+                    <strong>Moon Landing Delta-V:</strong> ~6.0 km/s<br>
+                    <span style="font-size: 0.9rem; color: #64748b;">High fuel cost to land and take off.</span>
+                </div>
+
+                <div class="stat-box" style="border-color: var(--accent-blue);">
+                    <strong>NEA Rendezvous Delta-V:</strong> ~3.8 km/s<br>
+                    <span style="font-size: 0.9rem; color: #64748b;">Many NEAs are energetically "closer" than the Moon because they have negligible gravity wells. You don't land on them; you dock with them.</span>
+                </div>
+            </div>
+            
+            <div class="delta-visual">
+                <img src="Delta V Budget.png" width="600px" height="465px" alt="Delta V Chart">
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Prime Mining Candidates</h2>
+        <p>Current exploration missions have identified several high-value targets within the NEA population.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Asteroid Name</th>
+                    <th>Type</th>
+                    <th>Estimated Value / Resources</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>162173 Ryugu</strong></td>
+                    <td><span class="tag tag-c">C-Type</span></td>
+                    <td>Water, Organics, Clay</td>
+                    <td>Sampled by JAXA (Hayabusa2). Rich in water-bearing minerals.</td>
+                </tr>
+                <tr>
+                    <td><strong>101955 Bennu</strong></td>
+                    <td><span class="tag tag-c">C-Type</span></td>
+                    <td>Carbon, Water, Iron</td>
+                    <td>Sampled by NASA (OSIRIS-REx). High potential for fuel production.</td>
+                </tr>
+                <tr>
+                    <td><strong>3554 Amun</strong></td>
+                    <td><span class="tag tag-m">M-Type</span></td>
+                    <td>$20 Trillion (Platinum/Gold)</td>
+                    <td>Theoretical "treasure chest" of heavy metals.</td>
+                </tr>
+                <tr>
+                    <td><strong>433 Eros</strong></td>
+                    <td><span class="tag tag-s">S-Type</span></td>
+                    <td>Magnesium, Silicon, Gold</td>
+                    <td>The first asteroid orbited by a probe (NEAR Shoemaker).</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer style="text-align: center; padding: 2rem; background: var(--accent-dark); color: #64748b; margin-top: 3rem;">
+        <p>Part of the Asteroid Mining Informational Series</p>
+    </footer>
+
+</body>
+</html>
